@@ -27,7 +27,7 @@ logger = logging.getLogger(__name__)
 MODEL_NAME = os.getenv("MODEL_NAME", "gemini-1.0-pro")
 
 # Define the agent
-agent = Agent(
+root_agent = Agent(
     model=MODEL_NAME,
     name="github_pr_review_agent",
     description="Reviews GitHub pull requests and provides constructive feedback on code quality",
@@ -59,6 +59,9 @@ agent = Agent(
         add_pr_comment
     ]
 )
+
+# Create an alias named 'agent' as well, for compatibility
+agent = root_agent
 
 # This file is loaded by the ADK CLI when you run: adk run pr_reviewer
 logger.info(f"PR Review Agent initialized with model: {MODEL_NAME}")
